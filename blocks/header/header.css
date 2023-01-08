@@ -1,0 +1,22 @@
+.header {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    max-width: 880px;
+    margin: 0 auto;
+    padding-top: 45px;
+    padding-bottom: 41px;
+    border-bottom: 1px solid rgba(84, 84, 84, 1);
+}
+
+@media screen and (max-width: 767px) {
+    .header {
+        padding-top: 28px;
+        padding-left: 28px;
+        padding-bottom: 28px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header {
+        padding: 28px 0 31.6px 27px;
+    }
+}

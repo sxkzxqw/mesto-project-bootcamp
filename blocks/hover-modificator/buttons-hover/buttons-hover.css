@@ -1,0 +1,29 @@
+.buttons-hover {
+    display: inline-block;
+    transition-property: transform;
+    transition-duration: 350ms;
+    transition-timing-function: ease;
+}
+
+.buttons-hover:hover {
+    display: inline-block;
+    transform: scale(1.05);
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 576px) {
+    .buttons-hover {
+        display: flex;
+        transition: none;
+        transition-property: none;
+        transition-duration: 0s;
+        transition-timing-function: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .buttons-hover:hover {
+        transform: scale(1);
+        display: flex;
+    }
+}

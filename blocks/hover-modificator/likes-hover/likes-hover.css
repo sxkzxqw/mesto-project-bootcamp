@@ -1,0 +1,12 @@
+.likes-hover:hover {
+    display: inline-block;
+    transform: scale(1.15);
+    opacity: 0.5;
+}
+
+.likes-hover {
+    display: inline-block;
+    transition-property: transform;
+    transition-duration: 350ms;
+    transition-timing-function: ease;
+}
