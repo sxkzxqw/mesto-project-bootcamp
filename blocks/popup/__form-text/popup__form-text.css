@@ -1,4 +1,4 @@
-.popup__login-text {
+.popup__form-text {
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 100%;
@@ -8,4 +8,14 @@
     white-space: nowrap;
     overflow: hidden;
     margin-bottom: 30px;
+}
+
+.popup__form-text:last-of-type {
+    margin-bottom: 48px;
+}
+
+@media screen and (max-width: 576px) {
+    .popup__form-text:last-of-type {
+        margin-bottom: 45px;
+    }
 }

@@ -7,6 +7,9 @@
     border-radius: 2px;
     cursor: pointer;
     margin-left: calc(100% - 150px - 486px);
+    background-image: url('../../../images/plus.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 @media screen and (max-width: 767px) {
@@ -14,13 +17,5 @@
         margin-left: auto;
         margin-right: auto;
         width: 282px;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .profile__add-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 }

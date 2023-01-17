@@ -5,7 +5,7 @@
     align-items: center;
     padding-left: 21px;
     padding-right: 30px;
-    height: 79px;
+    min-height: 79px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }

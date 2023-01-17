@@ -9,6 +9,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    height: 22px;
 }
 
 @media screen and (max-width: 767px) {
