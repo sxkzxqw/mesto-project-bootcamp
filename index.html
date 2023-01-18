@@ -30,6 +30,7 @@
             </section>
             <section class="places">
                 <article class="place">
+                    <button class="place__delete-button buttons-hover" type="button"></button>
                     <img src="./images/kirill-pershin-1088404-unsplash.jpg" class="place__image" alt="Ваше изображение">
                     <div class="place__description">
                         <h2 class="place__name">Карачаевск</h2>
@@ -94,6 +95,25 @@
             </form>
         </div>
     </div>
+    <template class="popup__image">
+        <div class="popup">
+            <div class="popup__container">
+                <img class="popup__image">
+                <p class="popup__description"></p>
+            </div>
+        </div>
+    </template>
+    <template class="place-template">
+        <article class="place">
+            <button class="place__delete-button buttons-hover" type="button"></button>
+            <img class="place__image" alt="Ваше изображение">
+            <div class="place__description">
+                <h2 class="place__name"></h2>
+                <button
+                    class="place__like-button likes-hover" type="button"></button>
+            </div>
+        </article>
+    </template>
     <script src="./vendor/index.js"></script>
 </body>
 
