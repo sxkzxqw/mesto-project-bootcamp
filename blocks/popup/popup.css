@@ -8,7 +8,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.5s linear;
 }
 
 @media screen and (max-width: 576px) {
