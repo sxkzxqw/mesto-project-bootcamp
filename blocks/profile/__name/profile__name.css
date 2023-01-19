@@ -15,6 +15,11 @@
 @media screen and (max-width: 940px) {
     .profile__name {
         max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .profile__name {
         text-align: right;
         margin-left: 42px;
     }
@@ -25,7 +30,6 @@
         font-weight: 500;
         font-size: 27px;
         line-height: 33px;
-        text-align: right;
         height: 36px;
         margin-left: 30px;
     }

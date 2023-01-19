@@ -1,0 +1,11 @@
+.popup__buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 17px;
+}
+
+@media screen and (max-width: 576px) {
+    .popup__buttons-container{
+        flex-direction: column;
+    }
+}

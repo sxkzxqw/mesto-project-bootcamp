@@ -1,0 +1,11 @@
+.popup__button-delete_type_deny {
+    color: white;
+    border: 0;
+    background-color: #FF1B1B;
+}
+
+@media screen and (min-width: 576px) {
+    .popup__buttons-container{
+        flex-direction: column;
+    }
+}

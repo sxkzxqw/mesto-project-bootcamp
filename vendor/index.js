@@ -120,10 +120,29 @@ const addPlace = function (el) {
     });
 
     //delete
-    const deleteButton = document.querySelector('.place__delete-button');
+/*     const deleteButton = document.querySelector('.place__delete-button');
     deleteButton.addEventListener('click', function(evt) {
         if (evt.target.closest('.place')) {
             place.remove();
+        };
+    }); */
+    const deleteButton = document.querySelector('.place__delete-button');
+    const submitDeletePopup = document.querySelector('.popup-delete-submit');
+    const submitDeletePopupYesButton = submitDeletePopup.querySelector('.popup__button-delete_type_accept');
+    const submitDeletePopupNoButton = submitDeletePopup.querySelector('.popup__button-delete_type_deny');
+    const submitDeletePopupCloseButton = submitDeletePopup.querySelector('.popup__close-button');
+    deleteButton.addEventListener('click', function(evt) {
+        if (evt.target.closest('.place')) {
+            submitDeletePopup.classList.add('popup_opened');
+            const closeDeletePopup = function() {
+                submitDeletePopup.classList.remove('popup_opened');
+            };
+            submitDeletePopupYesButton.addEventListener('click', function() {
+                place.remove();
+                closeDeletePopup();
+            });
+            submitDeletePopupNoButton.addEventListener('click', closeDeletePopup);
+            submitDeletePopupCloseButton.addEventListener('click', closeDeletePopup);
         };
     });
 }; 

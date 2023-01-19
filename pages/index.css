@@ -36,3 +36,7 @@
 @import url('../blocks/popup/__image-description/popup__image-description.css');
 @import url('../blocks/popup/__full-image/popup__full-image.css');
 @import url('../blocks/profile/__info-container/profile__info-container.css');
+@import url('../blocks/popup/__buttons-container/popup__buttons-container.css');
+@import url('../blocks/popup/__button-delete/popup__button-delete.css');
+@import url('../blocks/popup/__button-delete/_type_deny/popup__button-delete_type_deny.css');
+@import url('../blocks/popup/__title-delete/popup__title-delete.css');

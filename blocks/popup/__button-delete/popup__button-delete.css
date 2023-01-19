@@ -1,0 +1,22 @@
+.popup__button-delete {
+    background: #000000;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    height: 50px;
+    width: 200px;
+}
+
+@media screen and (max-width: 576px) {
+    .popup__button-delete {
+        width: 220px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        height: 46px;
+    }
+}
