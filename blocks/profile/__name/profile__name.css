@@ -12,6 +12,14 @@
     max-width: 370px;
 }
 
+@media screen and (max-width: 940px) {
+    .profile__name {
+        max-width: 300px;
+        text-align: right;
+        margin-left: 42px;
+    }
+}
+
 @media screen and (max-width: 576px) {
     .profile__name {
         font-weight: 500;
