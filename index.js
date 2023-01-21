@@ -157,15 +157,14 @@ const addPlace = function (el) {
             closeAndOpenProfilePopup(templateBigImg);
         }
     });
-    closeBtnImg.addEventListener('click', function(evt) {
-        if (evt.target.closest('.popup__big-image')) {
-            templateBigImg.classList.remove('popup_opened');
-        }
-    });
-
-    return card;
 }; 
-console.log(card);
+
+closeBtnImg.addEventListener('click', function(evt) {
+    if (evt.target.closest('.popup__big-image')) {
+        templateBigImg.classList.remove('popup_opened');
+    }
+});
+
 
 
 //add six default cards
