@@ -21,11 +21,11 @@
         <main class="content">
             <section class="profile">
                 <div class="profile__info-container">
-                    <img src="./images/image.jpg" class="profile__picture" alt="Фотография профиля">
+                    <img src="https://i.pinimg.com/originals/e6/3f/e6/e63fe6ec84346d027f10ec4ee7c58fc7.jpg" class="profile__picture" alt="Фотография профиля">
                     <div class="profile__info">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <h1 class="profile__name">Jotaro Kujo</h1>
                         <button class="profile__edit-button buttons-hover" type="menu"></button>
-                        <p class="profile__description">Исследователь океана</p>
+                        <p class="profile__description">Star Platinum</p>
                     </div>
                 </div>
                 <button class="profile__add-button  buttons-hover" type="button"></button>
@@ -37,7 +37,7 @@
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
     </div>
-    <div class="popup"> <!-- нужно добавить в этот класс еще один popup_opened для того, чтобы открыть popup-->
+    <div class="popup" id="popup-edit-profile">
         <div class="popup__container">
             <button class="popup__close-button buttons-hover"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -48,7 +48,18 @@
             </form>
         </div>
     </div>
-    <div class="popup popup-image">
+    <div class="popup" id="popup-add-card">
+        <div class="popup__container">
+            <button class="popup__close-button buttons-hover"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form action="#" method="post" enctype="multipart/form-data" class="popup__form" name="editPlace">
+                <input type="text" class="popup__form-text popup__form-text_type_name" name="placeName" placeholder="Название" required>
+                <input type="text" class="popup__form-text popup__form-text_type_description" placeholder="Ссылка на страницу" name="placeLink" required>
+                <button class="popup__button buttons-hover" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup" id="popup-image">
         <div class="popup__container-img">
             <figure class="popup__big-image">
                 <button class="popup__close-button buttons-hover"></button>
@@ -57,7 +68,7 @@
             </figure>
         </div>
     </div>
-    <div class="popup popup-delete-submit">
+    <div class="popup" id="popup-delete-submit">
         <div class="popup__container">
             <button class="popup__close-button buttons-hover"></button>
             <h2 class="popup__title-delete">Вы уверены?</h2>
@@ -67,7 +78,7 @@
             </div>
         </div>
     </div>
-    <template class="place-template">
+    <template id="place-template">
         <article class="place">
             <button class="place__delete-button buttons-hover" type="button"></button>
             <img class="place__image" alt="Ваше изображение" src="#">
@@ -78,7 +89,7 @@
         </article>
     </template>
 
-    <script src="./vendor/index.js"></script>
+    <script src="./index.js"></script>
 </body>
 
 </html>
