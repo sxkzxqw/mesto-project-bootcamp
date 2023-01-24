@@ -110,45 +110,18 @@ const placeImg = document.querySelector('.place__image');
 const closeBtnImg = templateBigImg.querySelector('.popup__close-button');
 
 
+const placeTemplate = document.querySelector('#place-template').content;
+
 //add place function
 const addPlace = function (el) {
-    const placeTemplate = document.querySelector('#place-template').content;
     const card = placeTemplate.querySelector('.place').cloneNode(true);
-    const placeImage = placeTemplate.querySelector('.place__image');
-    const placeCard = card.querySelector('.place');
     
     //place create
     card.querySelector('.place__image').src = el.link;
     card.querySelector('.place__name').textContent = el.name;
     cardsList.prepend(card); 
 
-    //big img popup
 
-    //like
-    const likeButton = document.querySelector('.place__like-button');
-    likeButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('place__like-button_type_active');
-    });
-
-    const deleteButton = document.querySelector('.place__delete-button');
-    const submitDeletePopup = document.querySelector('#popup-delete-submit');
-    const submitDeletePopupYesButton = submitDeletePopup.querySelector('.popup__button-delete_type_accept');
-    const submitDeletePopupNoButton = submitDeletePopup.querySelector('.popup__button-delete_type_deny');
-    const submitDeletePopupCloseButton = submitDeletePopup.querySelector('.popup__close-button');
-    deleteButton.addEventListener('click', function(evt) {
-        if (evt.target.closest('.place')) {
-            submitDeletePopup.classList.add('popup_opened');
-            const closeDeletePopup = function() {
-                submitDeletePopup.classList.remove('popup_opened');
-            };
-            submitDeletePopupYesButton.addEventListener('click', function() {
-                card.remove();
-                closeDeletePopup();
-            });
-            submitDeletePopupNoButton.addEventListener('click', closeDeletePopup);
-            submitDeletePopupCloseButton.addEventListener('click', closeDeletePopup);
-        };
-    });
 
     card.querySelector('.place__image').addEventListener('click', function(evt) {
         if (evt.target.closest('.place')) {
@@ -157,6 +130,7 @@ const addPlace = function (el) {
             closeAndOpenProfilePopup(templateBigImg);
         }
     });
+    console.log(card);
 }; 
 
 closeBtnImg.addEventListener('click', function(evt) {
@@ -183,3 +157,32 @@ const addPlaceSubmit = function (evt) {
 
 formElementImage.addEventListener('submit', addPlaceSubmit);
 
+//like
+
+cardsList.addEventListener('click', function (evt) {
+    if (evt.target.classList.contains('place__like-button')) {
+    evt.target.classList.toggle('place__like-button_type_active');
+    }
+});
+
+//delete
+const deleteButton = document.querySelector('.place__delete-button');
+const submitDeletePopup = document.querySelector('#popup-delete-submit');
+const submitDeletePopupYesButton = submitDeletePopup.querySelector('.popup__button-delete_type_accept');
+const submitDeletePopupNoButton = submitDeletePopup.querySelector('.popup__button-delete_type_deny');
+const submitDeletePopupCloseButton = submitDeletePopup.querySelector('.popup__close-button');
+
+cardsList.addEventListener('click', function (evt) {
+    if (evt.target.classList.contains('place__delete-button')) {
+        submitDeletePopup.classList.add('popup_opened');
+        const closeDeletePopup = function() {
+            submitDeletePopup.classList.remove('popup_opened');
+        };
+        submitDeletePopupYesButton.addEventListener('click', function() {
+            evt.target.closest('.place').remove();
+            closeDeletePopup();
+        });
+        submitDeletePopupNoButton.addEventListener('click', closeDeletePopup);
+        submitDeletePopupCloseButton.addEventListener('click', closeDeletePopup);
+    }
+});
