@@ -1,0 +1,5 @@
+.popup__label {
+    display: flex;
+    flex-direction: column;
+    min-height: 64px;
+}

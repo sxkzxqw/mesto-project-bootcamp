@@ -1,0 +1,14 @@
+.popup__form {
+    margin-top: 48px;
+    font-family: 'Inter', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 576px) {
+    .popup__form {
+        margin-top: 75px;
+    }
+}

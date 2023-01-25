@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Интерактивный сайт о красивых метсах мира.">
+    <meta name="keywords" content="Место, красивые места, места, мир, горы, здания, постройки, природа">
+    <meta name="author" content="sxkzxqw">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="shortcut icon" href="<%=require('./images/Close-Icon.svg')%>" type="image/x-icon">
+</head>
+
+<body class="root">
+    <div class="page">
+        <header class="header">
+            <img src="<%=require('./images/Vector.svg')%>" class="header__logo" alt="Логотип проекта Mesto">
+        </header>
+        <main class="content">
+            <section class="profile">
+                <div class="profile__info-container">
+                    <img src="<%=require('./images/jojo.jpg')%>" class="profile__picture" alt="Фотография профиля">
+                    <div class="profile__info">
+                        <h1 class="profile__name">Jotaro Kujo</h1>
+                        <button class="profile__edit-button buttons-hover" type="menu"></button>
+                        <p class="profile__description">Star Platinum</p>
+                    </div>
+                </div>
+                <button class="profile__add-button  buttons-hover" type="button"></button>
+            </section>
+            <section class="places">
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+        </footer>
+    </div>
+    <div class="popup" id="popup-edit-profile">
+        <div class="popup__container">
+            <button class="popup__close-button buttons-hover"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form action="#" method="post" enctype="multipart/form-data" class="popup__form" name="editForm" novalidate>
+                <fieldset class="popup__fieldset">
+                    <label class="popup__label">
+                        <input type="text" class="popup__form-text popup__form-text_type_name" name="user-name" minlength="2" maxlength="40" required>
+                        <span id="user-name-error" class="popup__error"></span>
+                    </label>
+                    <label class="popup__label">
+                        <input type="text" class="popup__form-text popup__form-text_type_description" name="user-description" minlength="2" maxlength="200" required>
+                        <span id="user-description-error" class="popup__error"></span>
+                    </label>
+                </fieldset>
+                <button class="popup__button buttons-hover" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup" id="popup-add-card">
+        <div class="popup__container">
+            <button class="popup__close-button buttons-hover"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form action="#" method="post" enctype="multipart/form-data" class="popup__form" name="editPlace" novalidate>
+                <fieldset class="popup__fieldset">
+                    <label class="popup__label">
+                        <input type="text" class="popup__form-text popup__form-text_type_name" name="placeName" placeholder="Название" minlength="2" maxlength="30" required>
+                        <span id="placeName-error" class="popup__error"></span>
+                    </label>
+                    <label class="popup__label">
+                        <input type="url" class="popup__form-text popup__form-text_type_description" placeholder="Ссылка на страницу" name="placeLink" required>
+                        <span id="placeLink-error" class="popup__error"></span>
+                    </label>
+                </fieldset>
+                <button class="popup__button buttons-hover" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup" id="popup-image">
+        <div class="popup__container-img">
+            <figure class="popup__big-image">
+                <button class="popup__close-button buttons-hover"></button>
+                <img class="popup__full-image" alt="Изображение" src="#">
+                <figcaption class="popup__image-description"></figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="popup" id="popup-delete-submit">
+        <div class="popup__container">
+            <button class="popup__close-button buttons-hover"></button>
+            <h2 class="popup__title-delete">Вы уверены?</h2>
+            <div class="popup__buttons-container">
+                <button class="popup__button-delete buttons-hover popup__button-delete_type_accept" type="button">Да</button>
+                <button class="popup__button-delete buttons-hover popup__button-delete_type_deny" type="button">Нет</button>
+            </div>
+        </div>
+    </div>
+    <template id="place-template">
+        <article class="place">
+            <button class="place__delete-button buttons-hover" type="button"></button>
+            <img class="place__image" alt="Ваше изображение" src="#">
+            <div class="place__description">
+                <h2 class="place__name"></h2>
+                <button class="place__like-button likes-hover" type="button"></button>
+            </div>
+        </article>
+    </template>
+</body>
+
+</html>

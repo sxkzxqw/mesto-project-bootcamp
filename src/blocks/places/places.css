@@ -1,0 +1,31 @@
+.places {
+    box-sizing: border-box;
+    min-width: 282px;
+    margin-top: 51px;
+    display: grid;
+    row-gap: 20px;
+    column-gap: 17px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 940px) {
+    .places {
+        grid-template-columns: repeat(2, 1fr);
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .places {
+        padding-left: 19px;
+        padding-right: 19px;
+    }
+}
+
+@media screen and (max-width: 636px) {
+    .places {
+        grid-template-columns: 1fr;
+        margin-top: 36px;
+    }
+}

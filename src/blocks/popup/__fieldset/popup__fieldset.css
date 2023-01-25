@@ -1,0 +1,10 @@
+.popup__fieldset {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 48px;
+    max-height: 92px;
+}
