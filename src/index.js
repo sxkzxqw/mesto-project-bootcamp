@@ -2,7 +2,7 @@ import "./pages/index.css";
 import { initialCards } from "./components/defaultCards";
 import { validation } from "./components/validate";
 import { cardsList } from "./components/utils";
-import { profileEditButton, profilePopupCloseButton, addButton, addCardPopupCloseButton, profilePopup, addCardPopup, templateBigImg, closeAndOpenProfilePopup, closePopupOnEscBtn, closePopupOnOverlayClick } from "./components/modal";
+import { profileEditButton, profilePopupCloseButton, addButton, addCardPopupCloseButton, profilePopup, addCardPopup, templateBigImg, closePopupOnEscBtn, closePopupOnOverlayClick, closePopup, openPopup } from "./components/modal";
 import { addPlace, submitDeletePopup } from "./components/card";
 
 //add six default cards
@@ -28,20 +28,20 @@ validation(selectorsForValidation);
 
 //event listeners for first popup
 profilePopupCloseButton.addEventListener('click', () => {
-    closeAndOpenProfilePopup(profilePopup);
+    closePopup(profilePopup);
 });
 profileEditButton.addEventListener('click', () => {
-    closeAndOpenProfilePopup(profilePopup);
+    openPopup(profilePopup);
 });
 
 
 //event listeners for second popup
 addButton.addEventListener('click', () => {
-    closeAndOpenProfilePopup(addCardPopup);
+    openPopup(addCardPopup);
 });
 
 addCardPopupCloseButton.addEventListener('click', () => {
-    closeAndOpenProfilePopup(addCardPopup);
+    closePopup(addCardPopup);
 });
 
 //adding opportunity to close popups by escape button

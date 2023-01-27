@@ -1,5 +1,3 @@
-import { addButton } from "./modal";
-
 function showErrorMessage(inputElement, errorElement, selectors) {
     inputElement.classList.add(selectors.inputErrorSelector);
     errorElement.textContent = inputElement.validationMessage;
@@ -43,7 +41,7 @@ function setEventListeners(elementForm, selectors) {
     });
 
     //reset validation on new card
-    addButton.addEventListener('click', () => {
+    elementForm.addEventListener('reset', () => {
         buttonValidity(submitButton, false, selectors);
     });
 

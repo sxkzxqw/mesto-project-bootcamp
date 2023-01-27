@@ -1,8 +1,14 @@
 import { cardsList } from "./utils";
 import { templateBigImg, bigImg, bigImgDescription} from "./modal";
-import { closeAndOpenProfilePopup } from "./modal";
+import { closePopup, openPopup } from "./modal";
 
 const placeTemplate = document.querySelector('#place-template').content;
+
+//delete
+export const submitDeletePopup = document.querySelector('#popup-delete-submit');
+const submitDeletePopupYesButton = submitDeletePopup.querySelector('.popup__button-delete_type_accept');
+export const submitDeletePopupNoButton = submitDeletePopup.querySelector('.popup__button-delete_type_deny');
+export const submitDeletePopupCloseButton = submitDeletePopup.querySelector('.popup__close-button');
 
 //add place function
 export const addPlace = function (el) {
@@ -11,6 +17,7 @@ export const addPlace = function (el) {
     //place create
     card.querySelector('.place__image').src = el.link;
     card.querySelector('.place__name').textContent = el.name;
+    card.querySelector('.place__image').alt = `Картинка ${el.name}`;
 
     
     //big img
@@ -18,47 +25,26 @@ export const addPlace = function (el) {
         if (evt.target.closest('.place')) {
             bigImg.src = el.link;
             bigImgDescription.textContent = el.name;
-            closeAndOpenProfilePopup(templateBigImg);
+            bigImg.alt = `Картинка ${el.name}`;
+            openPopup(templateBigImg);
         }
     });
-    return card;
-};
 
-/* cardsList.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('place__image')) {
-        bigImg.src = evt.target.src;
-        bigImgDescription.textContent = evt.target.textContent;
-        closeAndOpenProfilePopup(templateBigImg);
-    }
-}); */
+    //like btn
+    const likeButton = card.querySelector('.place__like-button'); 
+    likeButton.addEventListener('click', function (evt) { 
+    evt.target.classList.toggle('place__like-button_type_active'); 
+    }); 
 
-//like
-
-cardsList.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('place__like-button')) {
-        evt.target.classList.toggle('place__like-button_type_active');
-    }
-});
-
-//delete
-export const submitDeletePopup = document.querySelector('#popup-delete-submit');
-const submitDeletePopupYesButton = submitDeletePopup.querySelector('.popup__button-delete_type_accept');
-const submitDeletePopupNoButton = submitDeletePopup.querySelector('.popup__button-delete_type_deny');
-const submitDeletePopupCloseButton = submitDeletePopup.querySelector('.popup__close-button');
-
-cardsList.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('place__delete-button')) {
-        submitDeletePopup.classList.add('popup_opened');
-        const closeDeletePopup = function () {
-            submitDeletePopup.classList.remove('popup_opened');
-        };
+    //del popup
+    card.querySelector('.place__delete-button').addEventListener('click', function (evt) {
+        openPopup(submitDeletePopup);
         submitDeletePopupYesButton.addEventListener('click', function () {
             evt.target.closest('.place').remove();
-            closeDeletePopup();
+            closePopup(submitDeletePopup);
         });
-        submitDeletePopupNoButton.addEventListener('click', closeDeletePopup);
-        submitDeletePopupCloseButton.addEventListener('click', closeDeletePopup);
-    }
-});
+    });
 
+    return card;
+};
 

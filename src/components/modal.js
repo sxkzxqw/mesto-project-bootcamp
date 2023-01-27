@@ -1,4 +1,4 @@
-import { addPlace } from "./card";
+import { addPlace, submitDeletePopupNoButton, submitDeletePopupCloseButton, submitDeletePopup } from "./card";
 import { cardsList } from "./utils";
 
 //profile popup selectors
@@ -16,19 +16,19 @@ profilePopupInputValueName.value = userName.textContent;
 profilePopupInputValueDescription.value = userDescription.textContent;
 
 //open and close popups
-export const closeAndOpenProfilePopup = function (popup) {
-    if(popup.classList.contains('popup_opened')) {
-            popup.classList.remove('popup_opened');
-        } else {
-            popup.classList.add('popup_opened');
-        }
+export const openPopup = function (popup) {
+    popup.classList.add('popup_opened');
+};
+
+export const closePopup = function (popup) {
+    popup.classList.remove('popup_opened');
 };
 
 //escape button close popup
 export function closePopupOnEscBtn(popup) {
     document.addEventListener('keydown', function (event) {
     if (event.key == 'Escape' && popup.classList.contains('popup_opened')) {
-        closeAndOpenProfilePopup(popup);
+        closePopup(popup);
     }
 });
 }
@@ -37,7 +37,7 @@ export function closePopupOnEscBtn(popup) {
 export function closePopupOnOverlayClick(popup) {
     popup.addEventListener('mousedown', function (event) {
         if (event.target.classList.contains('popup_opened')) {
-            closeAndOpenProfilePopup(popup);
+            closePopup(popup);
         }
     });
 }
@@ -63,7 +63,7 @@ export const closeBtnImg = templateBigImg.querySelector('.popup__close-button');
 
 closeBtnImg.addEventListener('click', function (evt) {
     if (evt.target.closest('.popup__big-image')) {
-        templateBigImg.classList.remove('popup_opened');
+        closePopup(templateBigImg);
     }
 });
 
@@ -74,7 +74,7 @@ function handleFormSubmit(evt) {
     evt.preventDefault();
     userName.textContent = profilePopupInputValueName.value;
     userDescription.textContent = profilePopupInputValueDescription.value;
-    closeAndOpenProfilePopup(profilePopup);
+    closePopup(profilePopup);
 }
 formElement.addEventListener('submit', handleFormSubmit);
 
@@ -87,7 +87,16 @@ const addPlaceSubmit = function (evt) {
     
     const newPlace = addPlace(cardNewPlace);
     cardsList.prepend(newPlace);
-    closeAndOpenProfilePopup(addCardPopup);
+    closePopup(addCardPopup);
     evt.target.reset();
 };
 formElementImage.addEventListener('submit', addPlaceSubmit);
+
+
+//close delete popup
+submitDeletePopupNoButton.addEventListener('click', function () {
+    closePopup(submitDeletePopup);
+});
+submitDeletePopupCloseButton.addEventListener('click', function () {
+    closePopup(submitDeletePopup);
+});
