@@ -40,19 +40,16 @@ addButton.addEventListener('click', () => {
     openPopup(addCardPopup);
 });
 
+
 addCardPopupCloseButton.addEventListener('click', () => {
     closePopup(addCardPopup);
 });
 
-//adding opportunity to close popups by escape button
-closePopupOnEscBtn(profilePopup);
-closePopupOnEscBtn(addCardPopup);
-closePopupOnEscBtn(templateBigImg);
-closePopupOnEscBtn(submitDeletePopup);
+
 
 //adding opportunity to close popups by overflow click
-closePopupOnOverlayClick(profilePopup);
-closePopupOnOverlayClick(addCardPopup);
-closePopupOnOverlayClick(templateBigImg);
-closePopupOnOverlayClick(submitDeletePopup);
+profilePopup.addEventListener('mousedown', closePopupOnOverlayClick);
+addCardPopup.addEventListener('mousedown', closePopupOnOverlayClick);
+templateBigImg.addEventListener('mousedown', closePopupOnOverlayClick);
+submitDeletePopup.addEventListener('mousedown', closePopupOnOverlayClick);
 

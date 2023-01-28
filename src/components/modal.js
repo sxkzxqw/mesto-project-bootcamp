@@ -18,28 +18,28 @@ profilePopupInputValueDescription.value = userDescription.textContent;
 //open and close popups
 export const openPopup = function (popup) {
     popup.classList.add('popup_opened');
-};
+    document.addEventListener('keydown', closePopupOnEscBtn);
+}
 
 export const closePopup = function (popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupOnEscBtn);
 };
 
 //escape button close popup
-export function closePopupOnEscBtn(popup) {
-    document.addEventListener('keydown', function (event) {
-    if (event.key == 'Escape' && popup.classList.contains('popup_opened')) {
-        closePopup(popup);
+function closePopupOnEscBtn(event) {
+    if (event.key == 'Escape') {
+        const currentPopup = document.querySelector('.popup_opened');
+        closePopup(currentPopup);
     }
-});
 }
 
 //overlay close popup
-export function closePopupOnOverlayClick(popup) {
-    popup.addEventListener('mousedown', function (event) {
-        if (event.target.classList.contains('popup_opened')) {
-            closePopup(popup);
-        }
-    });
+export function closePopupOnOverlayClick(evt) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+        const currentPopup = document.querySelector('.popup_opened');
+        closePopup(currentPopup);
+    }
 }
 
 

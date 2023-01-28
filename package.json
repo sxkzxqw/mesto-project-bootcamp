@@ -1,4 +1,8 @@
 {
+  "name": "mesto-project-bootcamp",
+  "version": "1.0.0",
+  "description": "В данном проекте реализуется множество технологий, а также JavaScript.",
+  "main": "babel.config.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
@@ -22,5 +26,16 @@
   },
   "dependencies": {
     "core-js": "^3.27.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxkzxqw/mesto-project-bootcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sxkzxqw/mesto-project-bootcamp/issues"
+  },
+  "homepage": "./"
 }
