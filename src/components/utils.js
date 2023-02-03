@@ -1,6 +1,9 @@
+import { addCardPopup } from "./modal";
 const cardsList = document.querySelector('.places');
-
-export { cardsList };
+const formElementImage = addCardPopup.querySelector('.popup__form');
+const popupPlaceHolderForNameOfPlace = addCardPopup.querySelector('.popup__form-text_type_name');
+const popupPlaceHolderForLink = addCardPopup.querySelector('.popup__form-text_type_description');
+export { cardsList, formElementImage, popupPlaceHolderForNameOfPlace, popupPlaceHolderForLink};
 
 export function buttonValidityForStatus(button, booleanTrue, selectors, text) {
     if (booleanTrue) {

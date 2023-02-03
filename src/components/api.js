@@ -15,7 +15,7 @@ export function getAllCards() {
         method: 'GET',
         headers: config.headers
     })
-        .then(promiseCall);
+    .then(promiseCall);
 }
 
 export function getUserId() {
@@ -23,7 +23,7 @@ export function getUserId() {
         method: 'GET',
         headers: config.headers
     })
-        .then(promiseCall);
+    .then(promiseCall);
 }
 
 export function getAllInfo() {
@@ -36,7 +36,7 @@ export function addCardApi(body) {
         headers: config.headers,
         body: JSON.stringify(body)
     })
-        .then(promiseCall);
+    .then(promiseCall);
 }
 
 export function deleteCard(id) {
@@ -61,7 +61,7 @@ export function setUserPicture(body) {
         headers: config.headers,
         body: JSON.stringify(body)
     })
-        .then(promiseCall);
+    .then(promiseCall);
 }
 
 export function setUserInfo(body) {
@@ -70,7 +70,7 @@ export function setUserInfo(body) {
         headers: config.headers,
         body: JSON.stringify(body)
     })
-        .then(promiseCall);
+    .then(promiseCall);
 }
 
 export function updateLike(cardID, liked) {
@@ -78,5 +78,5 @@ export function updateLike(cardID, liked) {
         method: liked ? 'DELETE' : 'PUT',
         headers: config.headers
     })
-        .then(promiseCall);
+    .then(promiseCall);
 }

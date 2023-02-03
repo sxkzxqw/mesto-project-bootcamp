@@ -1,8 +1,15 @@
-import { addPlace, submitDeletePopupNoButton, submitDeletePopupCloseButton, submitDeletePopup } from "./card";
-import { cardsList } from "./utils";
-import { addCardApi, getProfileInfo, setUserPicture, setUserInfo } from "./api";
+import { submitDeletePopupNoButton, 
+        submitDeletePopupCloseButton, 
+        submitDeletePopup } from "./card";
+
+import { getProfileInfo, 
+        setUserPicture, 
+        setUserInfo } from "./api";
+
 import { buttonValidityForStatus } from "./utils";
+
 import { selectorsForValidation } from "../index";
+
 
 //profile popup selectors
 export const profileEditButton = document.querySelector('.profile__edit-button');
@@ -58,10 +65,7 @@ export function closePopupOnOverlayClick(evt) {
 //second popup
 export const addCardPopup = document.querySelector('#popup-add-card');
 export const addCardPopupCloseButton = addCardPopup.querySelector('.popup__close-button');
-const popupPlaceHolderForNameOfPlace = addCardPopup.querySelector('.popup__form-text_type_name');
-const popupPlaceHolderForLink = addCardPopup.querySelector('.popup__form-text_type_description');
 export const addCardPopupSaveButton = addCardPopup.querySelector('.popup__button');
-const formElementImage = addCardPopup.querySelector('.popup__form');
 export const addButton = document.querySelector('.profile__add-button');
 
 //big img popup

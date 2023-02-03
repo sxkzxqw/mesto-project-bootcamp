@@ -1,18 +1,38 @@
 import './components/api';
 import "./pages/index.css";
 import { validation } from "./components/validate";
-import { buttonValidityForStatus, cardsList } from "./components/utils";
-import { profileEditButton, profilePopupCloseButton, addButton, addCardPopupCloseButton, profilePopup, addCardPopup, templateBigImg, closePopupOnEscBtn, closePopupOnOverlayClick, closePopup, openPopup, profileImage, profileImagePopup, profileImagePopupCloseButton, addCardPopupSaveButton } from "./components/modal";
-import { addPlace, submitDeletePopup } from "./components/card";
-import { addCardApi, getAllCards, getAllInfo, getUserId } from './components/api';
 
+import { buttonValidityForStatus, 
+        cardsList,
+        popupPlaceHolderForLink,
+        popupPlaceHolderForNameOfPlace,
+        formElementImage } from "./components/utils";
 
-const formElementImage = addCardPopup.querySelector('.popup__form');
-const popupPlaceHolderForNameOfPlace = addCardPopup.querySelector('.popup__form-text_type_name');
-const popupPlaceHolderForLink = addCardPopup.querySelector('.popup__form-text_type_description');
+import { profileEditButton, 
+        profilePopupCloseButton, 
+        addButton, 
+        addCardPopupCloseButton, 
+        profilePopup, 
+        addCardPopup, 
+        templateBigImg, 
+        closePopupOnOverlayClick, 
+        closePopup, 
+        openPopup, 
+        profileImage, 
+        profileImagePopup, 
+        profileImagePopupCloseButton, 
+        addCardPopupSaveButton } from "./components/modal";
+
+import { addPlace, 
+        submitDeletePopup } from "./components/card";
+
+import { addCardApi, 
+        getAllInfo } from './components/api';
+
 
 //get user id
 let userID = null;
+
 //add default cards
 function renderDefaultCards() {
     getAllInfo()
@@ -35,10 +55,6 @@ const addPlaceSubmit = function (evt) {
     evt.preventDefault();
     buttonValidityForStatus(addCardPopupSaveButton, true, selectorsForValidation);
     addCardApi({ name: popupPlaceHolderForNameOfPlace.value, link: popupPlaceHolderForLink.value}).then((newCardApi) => {
-        // const cardNewPlace = {};
-        // cardNewPlace.name = popupPlaceHolderForNameOfPlace.value;
-        // cardNewPlace.link = popupPlaceHolderForLink.value;
-        
         const newPlace = addPlace(newCardApi, userID);
         cardsList.prepend(newPlace);
         closePopup(addCardPopup);

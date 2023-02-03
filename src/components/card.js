@@ -1,7 +1,16 @@
-import { templateBigImg, bigImg, bigImgDescription} from "./modal";
-import { closePopup, openPopup } from "./modal";
-import { deleteCard, updateLike } from "./api";
-import { isLiked, checkLikeLocalView } from "./utils";
+import { templateBigImg, 
+        bigImg, 
+        bigImgDescription} from "./modal";
+
+import { closePopup, 
+        openPopup } from "./modal";
+
+import { deleteCard, 
+    updateLike } from "./api";
+
+import { isLiked, 
+    checkLikeLocalView } from "./utils";
+
 
 const placeTemplate = document.querySelector('#place-template').content;
 
@@ -47,6 +56,9 @@ export const addPlace = function (el, userID) {
             deleteCard(el._id)
             .then(() => {
                 evt.target.closest('.place').remove(); 
+            })
+            .catch((error) => {
+                console.log(error);
             });
             closePopup(submitDeletePopup);
         });
@@ -60,6 +72,9 @@ export const addPlace = function (el, userID) {
             .then(newDataCard => {
                 el.likes = newDataCard.likes;
                 checkLikeLocalView(el.likes, userID, likeButton, likesCounter);
+            })
+            .catch((error) => {
+                console.log(error);
             });
     }
     return card;
