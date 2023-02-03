@@ -20,11 +20,13 @@
         <main class="content">
             <section class="profile">
                 <div class="profile__info-container">
-                    <img src="<%=require('./images/jojo.jpg')%>" class="profile__picture" alt="Фотография профиля">
+                    <div class="profile__image">
+                        <img src="#" class="profile__picture" alt="Фотография профиля">
+                    </div>
                     <div class="profile__info">
-                        <h1 class="profile__name">Jotaro Kujo</h1>
+                        <h1 class="profile__name"></h1>
                         <button class="profile__edit-button buttons-hover" type="menu"></button>
-                        <p class="profile__description">Star Platinum</p>
+                        <p class="profile__description"></p>
                     </div>
                 </div>
                 <button class="profile__add-button  buttons-hover" type="button"></button>
@@ -93,13 +95,31 @@
             </div>
         </div>
     </div>
+    <div class="popup" id="popup-change-image-profile">
+        <div class="popup__container">
+            <button class="popup__close-button buttons-hover"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form action="#" method="post" enctype="multipart/form-data" class="popup__form" name="editPlace" novalidate>
+                <fieldset class="popup__fieldset">
+                    <label class="popup__label">
+                        <input type="url" class="popup__form-text popup__form-text_type_description" placeholder="Ссылка на изображение" name="profileChangeLink" required>
+                        <span id="profileChangeLink-error" class="popup__error"></span>
+                    </label>
+                </fieldset>
+                <button class="popup__button buttons-hover" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <template id="place-template">
         <article class="place">
             <button class="place__delete-button buttons-hover" type="button"></button>
             <img class="place__image" alt="Ваше изображение" src="#">
             <div class="place__description">
                 <h2 class="place__name"></h2>
-                <button class="place__like-button likes-hover" type="button"></button>
+                <div class="place__likes-container">
+                    <button class="place__like-button likes-hover" type="button"></button>
+                    <p class="place__count-likes">0</p>
+                </div>
             </div>
         </article>
     </template>

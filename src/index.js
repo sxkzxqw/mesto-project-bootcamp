@@ -1,20 +1,61 @@
+import './components/api';
 import "./pages/index.css";
-import { initialCards } from "./components/defaultCards";
 import { validation } from "./components/validate";
-import { cardsList } from "./components/utils";
-import { profileEditButton, profilePopupCloseButton, addButton, addCardPopupCloseButton, profilePopup, addCardPopup, templateBigImg, closePopupOnEscBtn, closePopupOnOverlayClick, closePopup, openPopup } from "./components/modal";
+import { buttonValidityForStatus, cardsList } from "./components/utils";
+import { profileEditButton, profilePopupCloseButton, addButton, addCardPopupCloseButton, profilePopup, addCardPopup, templateBigImg, closePopupOnEscBtn, closePopupOnOverlayClick, closePopup, openPopup, profileImage, profileImagePopup, profileImagePopupCloseButton, addCardPopupSaveButton } from "./components/modal";
 import { addPlace, submitDeletePopup } from "./components/card";
-
-//add six default cards
-initialCards.forEach(function (el) {
-    const newPlace = addPlace(el);
-    cardsList.prepend(newPlace);
-});
+import { addCardApi, getAllCards, getAllInfo, getUserId } from './components/api';
 
 
+const formElementImage = addCardPopup.querySelector('.popup__form');
+const popupPlaceHolderForNameOfPlace = addCardPopup.querySelector('.popup__form-text_type_name');
+const popupPlaceHolderForLink = addCardPopup.querySelector('.popup__form-text_type_description');
+
+//get user id
+let userID = null;
+//add default cards
+function renderDefaultCards() {
+    getAllInfo()
+    .then(([dataCards, userData]) => {
+        userID = userData._id;
+        dataCards.forEach(function (el) {
+            const newPlace = addPlace(el, userID);
+            cardsList.append(newPlace);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
+
+renderDefaultCards();
+
+//second popup form
+const addPlaceSubmit = function (evt) {
+    evt.preventDefault();
+    buttonValidityForStatus(addCardPopupSaveButton, true, selectorsForValidation);
+    addCardApi({ name: popupPlaceHolderForNameOfPlace.value, link: popupPlaceHolderForLink.value}).then((newCardApi) => {
+        // const cardNewPlace = {};
+        // cardNewPlace.name = popupPlaceHolderForNameOfPlace.value;
+        // cardNewPlace.link = popupPlaceHolderForLink.value;
+        
+        const newPlace = addPlace(newCardApi, userID);
+        cardsList.prepend(newPlace);
+        closePopup(addCardPopup);
+        evt.target.reset();
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    .finally(() => {
+        buttonValidityForStatus(addCardPopupSaveButton, false, selectorsForValidation, 'Создать');
+    });
+};
+
+formElementImage.addEventListener('submit', addPlaceSubmit);
 
 //validation configuration
-const selectorsForValidation = {
+export const selectorsForValidation = {
     formSelector: '.popup__form',
     buttonSubmitSelector: '.popup__button',
     inputSelector: '.popup__form-text',
@@ -30,6 +71,7 @@ validation(selectorsForValidation);
 profilePopupCloseButton.addEventListener('click', () => {
     closePopup(profilePopup);
 });
+
 profileEditButton.addEventListener('click', () => {
     openPopup(profilePopup);
 });
@@ -40,10 +82,20 @@ addButton.addEventListener('click', () => {
     openPopup(addCardPopup);
 });
 
-
 addCardPopupCloseButton.addEventListener('click', () => {
     closePopup(addCardPopup);
 });
+
+
+//event listeners for change profile image popup
+profileImage.addEventListener('click', () => {
+    openPopup(profileImagePopup);
+});
+
+profileImagePopupCloseButton.addEventListener('click', () => {
+    closePopup(profileImagePopup);
+});
+
 
 
 
@@ -52,4 +104,4 @@ profilePopup.addEventListener('mousedown', closePopupOnOverlayClick);
 addCardPopup.addEventListener('mousedown', closePopupOnOverlayClick);
 templateBigImg.addEventListener('mousedown', closePopupOnOverlayClick);
 submitDeletePopup.addEventListener('mousedown', closePopupOnOverlayClick);
-
+profileImagePopup.addEventListener('mousedown', closePopupOnOverlayClick);

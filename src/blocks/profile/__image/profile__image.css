@@ -1,0 +1,10 @@
+.profile__image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: url('../../../images/Vector-pen.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+    overflow: hidden;
+}

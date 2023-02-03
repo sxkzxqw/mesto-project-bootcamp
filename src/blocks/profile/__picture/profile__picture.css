@@ -2,5 +2,13 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.4s ease, visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.profile__picture:hover {
+    transform: scale(1.15);
+    opacity: 0.2;
 }

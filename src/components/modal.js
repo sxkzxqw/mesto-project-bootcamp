@@ -1,5 +1,8 @@
 import { addPlace, submitDeletePopupNoButton, submitDeletePopupCloseButton, submitDeletePopup } from "./card";
 import { cardsList } from "./utils";
+import { addCardApi, getProfileInfo, setUserPicture, setUserInfo } from "./api";
+import { buttonValidityForStatus } from "./utils";
+import { selectorsForValidation } from "../index";
 
 //profile popup selectors
 export const profileEditButton = document.querySelector('.profile__edit-button');
@@ -9,11 +12,19 @@ const userName = document.querySelector('.profile__name');
 const userDescription = document.querySelector('.profile__description');
 const profilePopupInputValueName = document.querySelector('.popup__form-text_type_name');
 const profilePopupInputValueDescription = document.querySelector('.popup__form-text_type_description');
+const profilePicture = document.querySelector('.profile__picture');
 
 
-//profile popup values
-profilePopupInputValueName.value = userName.textContent;
-profilePopupInputValueDescription.value = userDescription.textContent;
+//get profile info from api
+getProfileInfo()
+.then(data => {
+    userName.textContent = data.name;
+    userDescription.textContent = data.about;
+    profilePicture.src = data.avatar;
+    profilePopupInputValueName.value = userName.textContent;
+    profilePopupInputValueDescription.value = userDescription.textContent;
+});
+
 
 //open and close popups
 export const openPopup = function (popup) {
@@ -70,27 +81,26 @@ closeBtnImg.addEventListener('click', function (evt) {
 //first popup form
 const formElement = document.querySelector('.popup__form');
 
+const profilePopupSaveButton = profilePopup.querySelector('.popup__button');
 function handleFormSubmit(evt) {
     evt.preventDefault();
-    userName.textContent = profilePopupInputValueName.value;
-    userDescription.textContent = profilePopupInputValueDescription.value;
-    closePopup(profilePopup);
+    buttonValidityForStatus(profilePopupSaveButton, true, selectorsForValidation);
+    setUserInfo({name: profilePopupInputValueName.value, about: profilePopupInputValueDescription.value})
+    .then((userInfo) => {
+        userName.textContent = profilePopupInputValueName.value;
+        userDescription.textContent = profilePopupInputValueDescription.value;
+        closePopup(profilePopup);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    .finally(() => {
+        buttonValidityForStatus(profilePopupSaveButton, false, selectorsForValidation, 'Сохранить');
+    });
 }
 formElement.addEventListener('submit', handleFormSubmit);
 
-//second popup form
-const addPlaceSubmit = function (evt) {
-    evt.preventDefault();
-    const cardNewPlace = {};
-    cardNewPlace.name = popupPlaceHolderForNameOfPlace.value;
-    cardNewPlace.link = popupPlaceHolderForLink.value;
-    
-    const newPlace = addPlace(cardNewPlace);
-    cardsList.prepend(newPlace);
-    closePopup(addCardPopup);
-    evt.target.reset();
-};
-formElementImage.addEventListener('submit', addPlaceSubmit);
+
 
 
 //close delete popup
@@ -100,3 +110,34 @@ submitDeletePopupNoButton.addEventListener('click', function () {
 submitDeletePopupCloseButton.addEventListener('click', function () {
     closePopup(submitDeletePopup);
 });
+
+//change profile image popup
+export const profileImage = document.querySelector('.profile__picture');
+export const profileImagePopup = document.querySelector('#popup-change-image-profile');
+export const profileImagePopupCloseButton = profileImagePopup.querySelector('.popup__close-button');
+const profileImageInput = profileImagePopup.querySelector('.popup__form-text');
+const profileImageFieldset = profileImagePopup.querySelector('.popup__fieldset');
+const profileImageForm = profileImagePopup.querySelector('.popup__form');
+profileImageFieldset.setAttribute('style', 'margin-bottom: 30px');
+const profileImagePopupSaveButton = profileImagePopup.querySelector('.popup__button');
+
+
+
+//change profile image form 
+function changeImageSubmit(evt) {
+    evt.preventDefault();
+    buttonValidityForStatus(profileImagePopupSaveButton, true, selectorsForValidation);
+    setUserPicture({ avatar: profileImageInput.value })
+    .then(() => {
+        profileImage.src = profileImageInput.value;
+        closePopup(profileImagePopup);
+        evt.target.reset();
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    .finally(() => {
+        buttonValidityForStatus(profileImagePopupSaveButton, false, selectorsForValidation, 'Сохранить');
+    });
+}
+profileImageForm.addEventListener('submit', changeImageSubmit);
