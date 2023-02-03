@@ -13,11 +13,11 @@
 .profile__edit-button{align-self:end;background-color:transparent;background-image:url(8667ac4a523e8fc42e59.svg);background-position:50%;background-repeat:no-repeat;border:1px solid #fff;box-sizing:border-box;cursor:pointer;height:24px;width:24px}@media screen and (max-width:576px){.profile__edit-button{align-items:center;background-size:7.5px 7.5px;display:flex;height:18px;justify-content:center;width:18px}}
 .profile__info{align-content:center;-moz-column-gap:18px;column-gap:18px;display:grid;grid-auto-columns:minmax(auto,auto);grid-template-columns:auto auto;grid-template-rows:39px 18px;justify-content:start;margin-left:30px;row-gap:16px}@media screen and (max-width:767px){.profile__info{margin:22px auto 36px}}@media screen and (max-width:576px){.profile__info{-moz-column-gap:10px;column-gap:10px;grid-template-columns:1fr 18px;grid-template-rows:26px 14px;margin-bottom:36px;margin-top:26px;row-gap:14px}}
 .profile__name{color:#fff;font-size:42px;font-style:normal;font-weight:500;height:50px;line-height:114%;margin:0;max-width:370px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:940px){.profile__name{max-width:300px}}@media screen and (max-width:767px){.profile__name{margin-left:42px;text-align:right}}@media screen and (max-width:576px){.profile__name{font-size:27px;font-weight:500;height:36px;line-height:33px;margin-left:30px}}
-.profile__picture{border-radius:50%;height:120px;-o-object-fit:contain;object-fit:contain;width:120px}
+.profile__picture{border-radius:50%;cursor:pointer;height:120px;-o-object-fit:cover;object-fit:cover;overflow:hidden;transition:transform .4s ease,visibility .3s ease,opacity .3s ease;width:120px}.profile__picture:hover{opacity:.2;transform:scale(1.15)}
 .places{box-sizing:border-box;-moz-column-gap:17px;column-gap:17px;display:grid;grid-template-columns:repeat(3,1fr);margin-top:51px;min-width:282px;row-gap:20px}@media screen and (max-width:940px){.places{grid-template-columns:repeat(2,1fr);margin-left:auto;margin-right:auto}}@media screen and (max-width:767px){.places{padding-left:19px;padding-right:19px}}@media screen and (max-width:636px){.places{grid-template-columns:1fr;margin-top:36px}}
-.place{display:flex;flex-direction:column;position:relative}
-.place__description{align-items:center;background:#fff;border-bottom-left-radius:10px;border-bottom-right-radius:10px;display:flex;justify-content:space-between;min-height:79px;padding-left:21px;padding-right:30px}
-.place__image{aspect-ratio:1;border-top-left-radius:10px;border-top-right-radius:10px;cursor:pointer;-o-object-fit:cover;object-fit:cover;width:100%}
+.place{border-radius:10px;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.place__description{align-items:center;background:#fff;border-bottom-left-radius:10px;border-bottom-right-radius:10px;display:flex;justify-content:space-between;min-height:79px;padding-left:21px;padding-right:21px}
+.place__image{aspect-ratio:1;border-top-left-radius:10px;border-top-right-radius:10px;cursor:pointer;display:block;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;width:100%}
 .place__like-button{background-color:#fff;background-image:url(87ed371465c7a6a1cd01.svg);background-repeat:no-repeat;border:0;cursor:pointer;height:19px;width:22px}
 .place__like-button_type_active{background-image:url(fe17a515669479b1e649.svg);background-repeat:no-repeat}
 .place__name{font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -45,4 +45,7 @@
 .popup__label{display:flex;flex-direction:column;min-height:64px}
 .popup__form-text_type_invalid{border-bottom:1px solid red}
 .popup__button_type_disabled{background-color:#fff;border:1px solid #000;box-sizing:border-box;color:#000;cursor:not-allowed}
+.profile__image{background:url(8667ac4a523e8fc42e59.svg);background-position:50%;background-repeat:no-repeat;background-size:26px 26px;border-radius:50%;height:120px;overflow:hidden;width:120px}
+.place__likes-container{display:flex;flex-direction:column;gap:3px}
+.place__count-likes{font-size:13px;font-weight:400;line-height:16px;margin:0;text-align:center}
 
