@@ -8,7 +8,7 @@ function hideErrorMessage(inputElement, errorElement, selectors) {
     errorElement.textContent = inputElement.validationMessage;
 }
 
-function buttonValidity(button, booleanTrue, selectors) {
+export function buttonValidity(button, booleanTrue, selectors) {
     if (booleanTrue) {
         button.disabled = false;
         button.classList.remove(selectors.buttonDisabledSelector);
@@ -40,11 +40,6 @@ function setEventListeners(elementForm, selectors) {
         e.preventDefault();
     });
 
-    //reset validation on new card
-    elementForm.addEventListener('reset', () => {
-        buttonValidity(submitButton, false, selectors);
-    });
-
     [...inputList].forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             buttonValidity(submitButton, elementForm.checkValidity(), selectors);
@@ -59,7 +54,6 @@ export function validation(selectors) {
 
     const allForms = document.querySelectorAll(selectors.formSelector);
     [...allForms].forEach((elementForm) => {
-
         setEventListeners(elementForm, selectors);
     });
 }

@@ -9,8 +9,10 @@ import { deleteCard,
     updateLike } from "./api";
 
 import { isLiked, 
-    checkLikeLocalView } from "./utils";
+    checkLikeLocalView,
+buttonValidityForStatus } from "./utils";
 
+import { selectorsForValidation } from "../index";
 
 const placeTemplate = document.querySelector('#place-template').content;
 
@@ -25,7 +27,7 @@ export const addPlace = function (el, userID) {
     const card = placeTemplate.querySelector('.place').cloneNode(true);
     const deleteCardButton = card.querySelector('.place__delete-button');
     const likeButton = card.querySelector('.place__like-button'); 
-
+    const element = el;
     //place create
     card.querySelector('.place__image').src = el.link;
     card.querySelector('.place__name').textContent = el.name;
@@ -49,20 +51,56 @@ export const addPlace = function (el, userID) {
     likeButton.addEventListener('click', likeClick); 
 
     //del popup
-     card.querySelector('.place__delete-button').addEventListener('click', function (evt) {
+    function submitDeleting(evt, element) {
         openPopup(submitDeletePopup);
-        submitDeletePopupYesButton.addEventListener('click', function () {
-            evt.target.closest('.place').remove();
-            deleteCard(el._id)
-            .then(() => {
-                evt.target.closest('.place').remove(); 
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-            closePopup(submitDeletePopup);
-        });
+        submitDeletePopupClick(evt, element);
+    }
+    card.querySelector('.place__delete-button').addEventListener('click', function (evt) {
+        submitDeleting(evt, element);
     });
+
+        function deleteCardApi () {
+        buttonValidityForStatus(submitDeletePopupYesButton, true, selectorsForValidation);
+        deleteCard(el._id)
+        .then(() => {
+            card.remove();
+            closePopup(submitDeletePopup);
+            submitDeletePopupYesButton.removeEventListener('click', deleteCardApi);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+            buttonValidityForStatus(submitDeletePopupYesButton, false, selectorsForValidation, 'Да');
+        });
+    }
+    function submitDeletePopupClick () {
+        submitDeletePopupYesButton.addEventListener('click', deleteCardApi);
+    }
+
+    //close delete popup
+    submitDeletePopupNoButton.addEventListener('click', function () {
+        closePopup(submitDeletePopup);
+        submitDeletePopupYesButton.removeEventListener('click', deleteCardApi);
+    });
+    submitDeletePopupCloseButton.addEventListener('click', function () {
+        closePopup(submitDeletePopup);
+        submitDeletePopupYesButton.removeEventListener('click', deleteCardApi);
+    });
+    function closeSubmitDeletePopupOnOverlayClick(evt) {
+        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+            const currentPopup = document.querySelector('.popup_opened');
+            submitDeletePopupYesButton.removeEventListener('click', deleteCardApi);
+            closePopup(currentPopup);
+        }
+    }
+    submitDeletePopup.addEventListener('mousedown', closeSubmitDeletePopupOnOverlayClick);
+    // ------------------------------------------------------------------------------------------------
+    // мое решение по поводу бага с закрытием и открытием попапа подтверждающего удаления, не сомневаюсь
+    // что оно неправильное, поэтому было бы очень круто если бы вы разъяснили что не так и каким путем 
+    // это можно улучшить.
+    // ------------------------------------------------------------------------------------------------
+    /////////////////////////////////////////////
     if(el.owner._id !== el.id){
         deleteCardButton.remove();
     }

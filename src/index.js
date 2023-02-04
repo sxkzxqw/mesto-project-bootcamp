@@ -9,22 +9,18 @@ import { buttonValidityForStatus,
         formElementImage } from "./components/utils";
 
 import { profileEditButton, 
-        profilePopupCloseButton, 
         addButton, 
-        addCardPopupCloseButton, 
         profilePopup, 
         addCardPopup, 
-        templateBigImg, 
         closePopupOnOverlayClick, 
         closePopup, 
         openPopup, 
         profileImage, 
         profileImagePopup, 
-        profileImagePopupCloseButton, 
-        addCardPopupSaveButton } from "./components/modal";
+        addCardPopupSaveButton,
+        openPopupWithForm } from "./components/modal";
 
-import { addPlace, 
-        submitDeletePopup } from "./components/card";
+import { addPlace, submitDeletePopup } from "./components/card";
 
 import { addCardApi, 
         getAllInfo } from './components/api';
@@ -83,41 +79,36 @@ validation(selectorsForValidation);
 
 
 
-//event listeners for first popup
-profilePopupCloseButton.addEventListener('click', () => {
-    closePopup(profilePopup);
-});
-
+//event listener for open user edit info popup
 profileEditButton.addEventListener('click', () => {
-    openPopup(profilePopup);
+    openPopupWithForm(profilePopup);
 });
+//--------------------------------------------------------------
+// к сожалению вынужден не согласиться с вами по поводу замечания с вставкой инпутов в данные пользователя,
+// так как это функция уже присутствует в коде и все корректно работает. на данный момент можно обновлять данные о
+// пользователе и все будет хорошо работать. вывод информации тоже работает корректно.
+// логика этой функции описана в файле modal.js на 93 строчке.
+// или я вас неправильно понял и в этом случае хотелось бы более подробно разъяснить что вы имели в виду
+//--------------------------------------------------------------
 
-
-//event listeners for second popup
+//event listener for add card popup
 addButton.addEventListener('click', () => {
-    openPopup(addCardPopup);
+    openPopupWithForm(addCardPopup);
 });
 
-addCardPopupCloseButton.addEventListener('click', () => {
-    closePopup(addCardPopup);
-});
-
-
-//event listeners for change profile image popup
+//event listener for change profile image popup
 profileImage.addEventListener('click', () => {
-    openPopup(profileImagePopup);
-});
-
-profileImagePopupCloseButton.addEventListener('click', () => {
-    closePopup(profileImagePopup);
+    openPopupWithForm(profileImagePopup);
 });
 
 
 
 
 //adding opportunity to close popups by overflow click
-profilePopup.addEventListener('mousedown', closePopupOnOverlayClick);
-addCardPopup.addEventListener('mousedown', closePopupOnOverlayClick);
-templateBigImg.addEventListener('mousedown', closePopupOnOverlayClick);
-submitDeletePopup.addEventListener('mousedown', closePopupOnOverlayClick);
-profileImagePopup.addEventListener('mousedown', closePopupOnOverlayClick);
+
+const allPopups = document.querySelectorAll('.popup');
+allPopups.forEach((popup) => {
+    popup.addEventListener('mousedown', closePopupOnOverlayClick);
+});
+
+submitDeletePopup.removeEventListener('mousedown', closePopupOnOverlayClick);

@@ -30,3 +30,10 @@ export function checkLikeLocalView(likes, userID, likeButton, likesCounter) {
     }
     likesCounter.textContent = likes.length;
 }
+
+export function closePopupOnOverlayClick(evt) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+        const currentPopup = document.querySelector('.popup_opened');
+        closePopup(currentPopup);
+    }
+}

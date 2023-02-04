@@ -10,7 +10,7 @@ import { buttonValidityForStatus } from "./utils";
 
 import { selectorsForValidation } from "../index";
 
-
+import { buttonValidity } from "./validate";
 //profile popup selectors
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profilePopup = document.querySelector('.popup');
@@ -24,13 +24,16 @@ const profilePicture = document.querySelector('.profile__picture');
 
 //get profile info from api
 getProfileInfo()
-.then(data => {
-    userName.textContent = data.name;
-    userDescription.textContent = data.about;
-    profilePicture.src = data.avatar;
-    profilePopupInputValueName.value = userName.textContent;
-    profilePopupInputValueDescription.value = userDescription.textContent;
-});
+    .then(data => {
+        userName.textContent = data.name;
+        userDescription.textContent = data.about;
+        profilePicture.src = data.avatar;
+        profilePopupInputValueName.value = userName.textContent;
+        profilePopupInputValueDescription.value = userDescription.textContent;
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 
 //open and close popups
@@ -38,6 +41,13 @@ export const openPopup = function (popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupOnEscBtn);
 }
+
+export const openPopupWithForm = function (popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupOnEscBtn);
+    const currentButton = popup.querySelector('.popup__button');
+    buttonValidity(currentButton, false, selectorsForValidation);
+};
 
 export const closePopup = function (popup) {
     popup.classList.remove('popup_opened');
@@ -55,12 +65,23 @@ function closePopupOnEscBtn(event) {
 //overlay close popup
 export function closePopupOnOverlayClick(evt) {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+        // ---------------------------------------------------------------------------------------------------------
+        // В вашем решении второе условие функции теряет свою работоспособность, ниже описал почему.
+        // (клик на закрытие попапа перестает работать)
+        //
+        // В данной функции currentpopup нужен для того, чтобы отображать сам попап и закрывать его по
+        // клику на закрывающую кнопку(в случае если этой константы не будет, то в evt.target приходит только
+        // кнопка, и выходит два возможных вариант решения, либо делать переменную current popup, либо
+        // описывать второе условоие в котором будет только evt.target.classList.contains('popup__close-button')
+        // и в случае выбора второго варианта придется делать все это через метод closest, как по мне проще читать
+        // код в котором есть перменная с текущим попапом, нежели делать два условия)
+        //
+        // По поводу ошибки при двойном щелчке было бы интересно послушать как можно это исправить.
+        // ---------------------------------------------------------------------------------------------------------
         const currentPopup = document.querySelector('.popup_opened');
         closePopup(currentPopup);
     }
 }
-
-
 
 //second popup
 export const addCardPopup = document.querySelector('#popup-add-card');
@@ -75,12 +96,6 @@ export const bigImg = templateBigImg.querySelector('.popup__full-image');
 export const bigImgDescription = templateBigImg.querySelector('.popup__image-description');
 export const placeImg = document.querySelector('.place__image');
 export const closeBtnImg = templateBigImg.querySelector('.popup__close-button');
-
-closeBtnImg.addEventListener('click', function (evt) {
-    if (evt.target.closest('.popup__big-image')) {
-        closePopup(templateBigImg);
-    }
-});
 
 //first popup form
 const formElement = document.querySelector('.popup__form');
@@ -107,13 +122,7 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 
 
-//close delete popup
-submitDeletePopupNoButton.addEventListener('click', function () {
-    closePopup(submitDeletePopup);
-});
-submitDeletePopupCloseButton.addEventListener('click', function () {
-    closePopup(submitDeletePopup);
-});
+
 
 //change profile image popup
 export const profileImage = document.querySelector('.profile__picture');
