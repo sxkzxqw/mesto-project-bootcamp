@@ -96,6 +96,8 @@ function deleteCardApi() {
 }
 
 submitDeletePopupYesButton.addEventListener('click', deleteCardApi);
-
+submitDeletePopupNoButton.addEventListener('click', function () {
+    closePopup(submitDeletePopup);
+});
  
 
