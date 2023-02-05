@@ -1,6 +1,7 @@
 import './components/api';
 import "./pages/index.css";
-import { validation } from "./components/validate";
+import { validation, 
+        hideErrorMessage } from "./components/validate";
 
 import { buttonValidityForStatus, 
         cardsList,
@@ -14,17 +15,19 @@ import { profileEditButton,
         addCardPopup, 
         closePopupOnOverlayClick, 
         closePopup, 
-        openPopup, 
         profileImage, 
         profileImagePopup, 
         addCardPopupSaveButton,
-        openPopupWithForm } from "./components/modal";
+        openPopupWithForm,
+        profilePopupInputValueName,
+        profilePopupInputValueDescription,
+        userName,
+        userDescription } from "./components/modal";
 
 import { addPlace, submitDeletePopup } from "./components/card";
 
 import { addCardApi, 
         getAllInfo } from './components/api';
-
 
 //get user id
 let userID = null;
@@ -82,14 +85,9 @@ validation(selectorsForValidation);
 //event listener for open user edit info popup
 profileEditButton.addEventListener('click', () => {
     openPopupWithForm(profilePopup);
+    profilePopupInputValueName.value = userName.textContent;
+    profilePopupInputValueDescription.value = userDescription.textContent;
 });
-//--------------------------------------------------------------
-// к сожалению вынужден не согласиться с вами по поводу замечания с вставкой инпутов в данные пользователя,
-// так как это функция уже присутствует в коде и все корректно работает. на данный момент можно обновлять данные о
-// пользователе и все будет хорошо работать. вывод информации тоже работает корректно.
-// логика этой функции описана в файле modal.js на 93 строчке.
-// или я вас неправильно понял и в этом случае хотелось бы более подробно разъяснить что вы имели в виду
-//--------------------------------------------------------------
 
 //event listener for add card popup
 addButton.addEventListener('click', () => {
@@ -105,10 +103,7 @@ profileImage.addEventListener('click', () => {
 
 
 //adding opportunity to close popups by overflow click
-
 const allPopups = document.querySelectorAll('.popup');
 allPopups.forEach((popup) => {
     popup.addEventListener('mousedown', closePopupOnOverlayClick);
 });
-
-submitDeletePopup.removeEventListener('mousedown', closePopupOnOverlayClick);

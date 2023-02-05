@@ -10,15 +10,15 @@ import { buttonValidityForStatus } from "./utils";
 
 import { selectorsForValidation } from "../index";
 
-import { buttonValidity } from "./validate";
+import { buttonValidity, hideErrorMessage } from "./validate";
 //profile popup selectors
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profilePopup = document.querySelector('.popup');
 export const profilePopupCloseButton = document.querySelector('.popup__close-button');
-const userName = document.querySelector('.profile__name');
-const userDescription = document.querySelector('.profile__description');
-const profilePopupInputValueName = document.querySelector('.popup__form-text_type_name');
-const profilePopupInputValueDescription = document.querySelector('.popup__form-text_type_description');
+export const userName = document.querySelector('.profile__name');
+export const userDescription = document.querySelector('.profile__description');
+export const profilePopupInputValueName = document.querySelector('.popup__form-text_type_name');
+export const profilePopupInputValueDescription = document.querySelector('.popup__form-text_type_description');
 const profilePicture = document.querySelector('.profile__picture');
 
 
@@ -43,10 +43,16 @@ export const openPopup = function (popup) {
 }
 
 export const openPopupWithForm = function (popup) {
-    popup.classList.add('popup_opened');
+    openPopup(popup);
     document.addEventListener('keydown', closePopupOnEscBtn);
     const currentButton = popup.querySelector('.popup__button');
     buttonValidity(currentButton, false, selectorsForValidation);
+    const currentForm = popup.querySelector('.popup__form');
+    const currentInputs = currentForm.querySelectorAll('.popup__form-text');
+    currentInputs.forEach((input) => {
+        const errorElement = currentForm.querySelector(`#${input.name}-error`);
+        hideErrorMessage(input, errorElement, selectorsForValidation);
+    });
 };
 
 export const closePopup = function (popup) {
@@ -65,21 +71,9 @@ function closePopupOnEscBtn(event) {
 //overlay close popup
 export function closePopupOnOverlayClick(evt) {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-        // ---------------------------------------------------------------------------------------------------------
-        // В вашем решении второе условие функции теряет свою работоспособность, ниже описал почему.
-        // (клик на закрытие попапа перестает работать)
-        //
-        // В данной функции currentpopup нужен для того, чтобы отображать сам попап и закрывать его по
-        // клику на закрывающую кнопку(в случае если этой константы не будет, то в evt.target приходит только
-        // кнопка, и выходит два возможных вариант решения, либо делать переменную current popup, либо
-        // описывать второе условоие в котором будет только evt.target.classList.contains('popup__close-button')
-        // и в случае выбора второго варианта придется делать все это через метод closest, как по мне проще читать
-        // код в котором есть перменная с текущим попапом, нежели делать два условия)
-        //
-        // По поводу ошибки при двойном щелчке было бы интересно послушать как можно это исправить.
-        // ---------------------------------------------------------------------------------------------------------
         const currentPopup = document.querySelector('.popup_opened');
-        closePopup(currentPopup);
+        if (!currentPopup) return;
+        closePopup(currentPopup); 
     }
 }
 

@@ -3,7 +3,7 @@ function showErrorMessage(inputElement, errorElement, selectors) {
     errorElement.textContent = inputElement.validationMessage;
 }
 
-function hideErrorMessage(inputElement, errorElement, selectors) {
+export function hideErrorMessage(inputElement, errorElement, selectors) {
     inputElement.classList.remove(selectors.inputErrorSelector);
     errorElement.textContent = inputElement.validationMessage;
 }
