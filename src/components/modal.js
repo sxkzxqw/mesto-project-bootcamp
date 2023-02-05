@@ -44,7 +44,6 @@ export const openPopup = function (popup) {
 
 export const openPopupWithForm = function (popup) {
     openPopup(popup);
-    document.addEventListener('keydown', closePopupOnEscBtn);
     const currentButton = popup.querySelector('.popup__button');
     buttonValidity(currentButton, false, selectorsForValidation);
     const currentForm = popup.querySelector('.popup__form');
@@ -53,6 +52,7 @@ export const openPopupWithForm = function (popup) {
         const errorElement = currentForm.querySelector(`#${input.name}-error`);
         hideErrorMessage(input, errorElement, selectorsForValidation);
     });
+    currentForm.reset();
 };
 
 export const closePopup = function (popup) {

@@ -5,7 +5,7 @@ function showErrorMessage(inputElement, errorElement, selectors) {
 
 export function hideErrorMessage(inputElement, errorElement, selectors) {
     inputElement.classList.remove(selectors.inputErrorSelector);
-    errorElement.textContent = inputElement.validationMessage;
+    errorElement.textContent = '';
 }
 
 export function buttonValidity(button, booleanTrue, selectors) {
