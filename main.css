@@ -46,6 +46,6 @@
 .popup__form-text_type_invalid{border-bottom:1px solid red}
 .popup__button_type_disabled{background-color:#fff;border:1px solid #000;box-sizing:border-box;color:#000;cursor:not-allowed}
 .profile__image{background:url(8667ac4a523e8fc42e59.svg);background-position:50%;background-repeat:no-repeat;background-size:26px 26px;border-radius:50%;height:120px;overflow:hidden;width:120px}
-.place__likes-container{align-items:center;display:flex;flex-direction:column;gap:3px;justify-content:center}
+.place__likes-container{display:flex;flex-direction:column;gap:3px}
 .place__count-likes{font-size:13px;font-weight:400;line-height:16px;margin:0;text-align:center}
 
